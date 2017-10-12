@@ -37,6 +37,8 @@ public:
 	// Data necessary to give our triangle to OpenGL
 	GLuint VertexBufferID;
 
+	float lastTime;
+
 	float sTheta;
 
 	void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods)
@@ -67,6 +69,7 @@ public:
 	{
 		GLSL::checkVersion();
 
+		lastTime = 0;
 		sTheta = 0;
 
 		// Set background color.
@@ -160,11 +163,16 @@ public:
 		// Pop matrix stacks.
 		P->popMatrix();
 
+		float currentTime = (float) glfwGetTime();
+		float deltaTime = currentTime - lastTime;
+
 		// update shoulder angle - animate
-		if (sTheta < 1.4)
+		if (sTheta < 1.4f)
 		{
-			sTheta += 0.01;
+			sTheta += deltaTime * 0.2f;
 		}
+
+		lastTime = currentTime;
 	}
 };
 
