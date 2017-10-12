@@ -166,10 +166,14 @@ public:
 		float currentTime = (float) glfwGetTime();
 		float deltaTime = currentTime - lastTime;
 
-		// update shoulder angle - animate
-		if (sTheta < 1.4f)
+		// start animating after 1.5 seconds
+		if (currentTime > 1.5f)
 		{
-			sTheta += deltaTime * 0.2f;
+			// update shoulder angle - animate
+			if (sTheta < 1.4f)
+			{
+				sTheta += deltaTime * 0.2f;
+			}
 		}
 
 		lastTime = currentTime;
